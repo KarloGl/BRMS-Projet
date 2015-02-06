@@ -1,0 +1,258 @@
+/*La personne a donn� son nom*/
+rule "Nom obtenu" when
+    p : com.processuscomplexeAssuranceAuto.Person( !name.isEmpty() )
+then
+    System.out.println( "Salut " + p.getName() );
+end
+
+/*La personne n'a pas donn� son nom*/
+rule "Aucune r�ponse" when
+    p : com.processuscomplexeAssuranceAuto.Person( name.isEmpty() )
+then
+    System.out.println( "Pas de nom" );
+    System.exit(0);
+end
+
+/*La personne a entre 21 et 26 ans +1 points*/
+rule "A entre 21 et 26" when
+    p : com.processuscomplexeAssuranceAuto.Person( age >= 21 && age < 27 )
+then
+	p.setPts(p.getPts()+1);
+    System.out.println( "Vous avez entre 21 et 26 ans: + 1 points.  " );
+    
+end
+
+/*La personne a entre 27 et 35 ans +5 points*/
+rule "A entre 27 et 35" when
+    p : com.processuscomplexeAssuranceAuto.Person( age >= 27 && age < 36 )
+then
+	p.setPts(p.getPts()+5);
+    System.out.println( "Vous avez entre 27 et 35 ans: + 5 points." );
+    
+end
+
+
+/*La personne a entre 36 et 50 ans +10 points*/
+rule "A entre 36 et 50" when
+    p : com.processuscomplexeAssuranceAuto.Person( age >= 36 && age < 51 )
+then
+	p.setPts(p.getPts()+10);
+    System.out.println( "Vous avez entre 36 et 50 ans: + 10 points. " );
+    
+end
+
+/*La personne a entre 51 et 76 ans +5 points*/
+rule "A entre 51 et 76" when
+    p : com.processuscomplexeAssuranceAuto.Person( age >= 51 && age < 77 )
+then
+	p.setPts(p.getPts()+5);
+    System.out.println( "Vous avez entre 51 et 76 ans: + 5 points.");
+    
+end
+
+/*n'a pas l'age minimum*/
+rule "n'a pas l'age min" when
+    p : com.processuscomplexeAssuranceAuto.Person( age < 21 )
+then
+    System.out.println( "Vous n'avez pas l'age minimum :) Proc�dure arr�t�e" );
+    System.exit(0);
+end
+
+/*est trop vieux*/
+rule "trop vieux" when
+    p : com.processuscomplexeAssuranceAuto.Person( age >= 77 )
+then
+    System.out.println( "Vous �tres trop ag� pour notre compoagnie, d�sol� ! Proc�dure arr�t�e" );
+    System.exit(0);
+end
+
+
+/*La personne gagne entre 0 et 12000 euros par an +1 point*/
+rule "A entre 0 et 12 000 euros par an" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.salaire >= 0 && p.salaire <= 12000 )
+then
+	p.setPts(p.getPts()+1);
+    System.out.println(" Vous gagnez entre 0 et 12 000 euros par an. +1 point.");
+    
+end
+
+/*La personne gagne entre 12001 et 12000 euros par an +5 point*/
+rule "A entre 12000 et 24000 euros par an" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.salaire > 12000 && p.salaire <= 24000 )
+then
+	p.setPts(p.getPts()+5);
+    System.out.println(" Vous gagnez entre 12000 et 24000 euros par an. +5 point.");
+    
+end
+
+
+/*La personne gagne entre 24000 et 48000 euros par an +10 point*/
+rule "A entre 24000 et 48000 euros par an" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.salaire > 24000 && p.salaire <= 48000 )
+then
+	p.setPts(p.getPts()+10);
+    System.out.println("Vous gagnez entre 24000 et 48000 euros par an. +10 point.");
+    
+end
+
+
+/*La personne gagne entre 48000 et 120000 euros par an +20 point*/
+rule "A entre 48000 et 120000 euros par an" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.salaire > 48000 && p.salaire <= 120000 )
+then
+	p.setPts(p.getPts()+20);
+    System.out.println(" Vous gagnez entre 48000 et 120000 euros par an. +20 point. ");
+    
+end
+
+/*La personne gagne plus de 120000 euros par an +30 point*/
+rule "A plus de 120000 euros par an" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.salaire > 120000 )
+then
+	p.setPts(p.getPts()+30);
+    System.out.println("Vous gagnez plus de  120000 euros par an. +30 point.  ");
+    
+end
+
+
+
+
+/*La personne est en couple*/
+rule "couple" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.estEnCouple )
+then
+	p.setPts(p.getPts()+5);	
+    System.out.println("Vous êtes en couple +5 point.  ");
+    
+end
+
+
+/*La personne n'est pas en couple*/
+rule "Pas en couple" when
+    p : com.processuscomplexeAssuranceAuto.Person( !p.estEnCouple )
+then
+    System.out.println("Vous n'êtes pas en couple 0 point. ");
+    
+end
+
+/*La personne a une voiture de luxe*/
+rule "luxe" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.car.getCarType() == p.car.getCarType().LUXURY )
+then
+	p.setPts(p.getPts()+10);
+    System.out.println("Vous avez une voiture de luxe. +10 point. ");
+    
+end
+
+/*La personne a une voiture large*/
+rule "large" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.car.getCarType() == p.car.getCarType().LARGE )
+then
+	p.setPts(p.getPts()+30);
+    System.out.println("Vous avez une voiture large. +30 point. ");
+    
+end
+
+/*La personne a une voiture MEDIUM*/
+rule "MEDIUM" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.car.getCarType() == p.car.getCarType().MEDIUM )
+then
+	p.setPts(p.getPts()+40);
+    System.out.println("Vous avez une voiture MEDIUM. +40 point. ");
+    
+end
+
+/*La personne a une voiture SPORT*/
+rule "SPORT" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.car.getCarType() == p.car.getCarType().SPORT )
+then
+	p.setPts(p.getPts()+20);
+    System.out.println("Vous avez une voiture SPORT. +20 point. ");
+    
+end
+
+
+/*La personne a une voiture MUSCLE*/
+rule "MUSCLE" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.car.getCarType() == p.car.getCarType().MUSCLE )
+then
+	p.setPts(p.getPts()+15);
+    System.out.println("Vous avez une voiture MUSCLE. +15 point. ");
+    
+end
+
+
+/*La personne a une voiture SMALL*/
+rule "SMALL" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.car.getCarType() == p.car.getCarType().SMALL )
+then
+	p.setPts(p.getPts()+50);
+    System.out.println("Vous avez une voiture SMALL. +50 point. ");
+    
+end
+
+
+/*La personne a un antivol*/
+rule "isantitheft" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.car.isAntiTheftDevice() )
+then
+	p.setPts(p.getPts()+15);
+    System.out.println("Votre voiture a un systême antivol. +15 point. ");
+    
+end
+
+/*La personne n'a pas d'antivol*/
+rule "isnotantitheft" when
+    p : com.processuscomplexeAssuranceAuto.Person( !p.car.isAntiTheftDevice() )
+then
+    System.out.println("Votre voiture n'a pas de systême antivol. ");
+    
+end
+
+/*kilometrage de voiture faible*/
+rule "km faible" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.car.getKm() < 50000 )
+then
+	p.setPts(p.getPts()+5);
+    System.out.println("kilometrage de voiture faible + 5 points");
+    
+end
+
+
+/*kilometrage de voiture moyen*/
+rule "km moyen" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.car.getKm() >=50000 && p.car.getKm() < 150000   )
+then
+	p.setPts(p.getPts()+10);
+    System.out.println("kilometrage de voiture moyen + 10 points ");
+    
+end
+
+/*kilometrage de voiture fort*/
+rule "km fort" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.car.getKm() >= 150000 )
+then
+	p.setPts(p.getPts()+5);
+    System.out.println("kilometrage de voiture fort +5 points");
+    
+end
+
+
+/*OCCASE OUI*/
+rule "OCCASE OUI" when
+    p : com.processuscomplexeAssuranceAuto.Person( p.car.isOccase() )
+then
+	p.setPts(p.getPts()+10);
+    System.out.println("occase oui, 10 points");
+    
+end
+
+/*OCCASE NON*/
+rule "OCCASE NON" when
+    p : com.processuscomplexeAssuranceAuto.Person( !p.car.isOccase() )
+then
+    System.out.println("occase non, 0 point");
+    
+end
+
+
